@@ -1,6 +1,7 @@
 import Landing from "@/pages/Landing";
 
 export default function InstructionsComponent() {
+
   return (
     // <div className={styles.container}>
     //   <header className={styles.header_container}>
