@@ -1,7 +1,17 @@
 import styles from "./Submission.module.css"
 import { FiUpload } from 'react-icons/fi';
+import { useRouter } from 'next/router'; 
 
 export default function Submission() {
+  const router = useRouter(); 
+
+    // Function to handle the submit button click
+    const handleSubmitClick = () => {
+      //TODO:
+      // Do we need any logic here?
+      router.push('/Loading');
+    };
+
   return (
   <>
   <div className={styles.subumission_main_container}>
@@ -30,7 +40,7 @@ export default function Submission() {
             margin: "15px"
           }}
            type="file" id="myFile" name="filename"/>
-          <input type="submit" />
+          <input type="submit" onClick={handleSubmitClick}  />
       </form>
     </div>
     </div>
