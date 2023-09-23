@@ -1,6 +1,8 @@
 import styles from "./instructionsComponent.module.css";
+import Test from "./test";
 
 export default function InstructionsComponent() {
+
   return (
     <div className={styles.container}>
       <header className={styles.header_container}>
@@ -54,6 +56,7 @@ export default function InstructionsComponent() {
       <p className={styles.get_started}>
         Get started by editing this page in <span>/pages/index.js</span>
       </p>
+    <Test/>
     </div>
   );
 }
