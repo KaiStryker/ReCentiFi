@@ -1,0 +1,7 @@
+.landing{
+    display: flex;
+    flex-direction: row;
+    border-width: thin;
+    border-color: black;
+    border-style: solid;
+}
