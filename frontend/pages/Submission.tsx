@@ -1,4 +1,5 @@
 import styles from "./Submission.module.css"
+import { FiUpload } from 'react-icons/fi';
 
 export default function Submission() {
   return (
@@ -16,7 +17,21 @@ export default function Submission() {
     </form>
     </div>
     <div className={styles.upload_box}>
-
+    <div>
+      <FiUpload className={styles.upload_icon}/>
+    </div>
+      <form action="/action_page.php" 
+      style={{
+        display: "flex",
+        flexDirection: "column",
+      }}>
+          <input
+           style={{
+            margin: "15px"
+          }}
+           type="file" id="myFile" name="filename"/>
+          <input type="submit" />
+      </form>
     </div>
     </div>
 
