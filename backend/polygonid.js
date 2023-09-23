@@ -32,14 +32,14 @@ const createProfile = async (did) => {
 
 const issueClaim = async (did, tier) => {
     const requestBody = {
-        schema: 'https://raw.githubusercontent.com/teeolendo/lens-id/main/schemas/lensfollowers.json',
+        schema: 'https://raw.githubusercontent.com/kaistryker/recentifi/main/backend/schema/TierSystem.json',
         claims: [ 'id' ],
         credentialOptions: {
             anchor: false,
             persist: false,
             emailMessage: '',
             credential: {
-                schema: 'https://raw.githubusercontent.com/teeolendo/lens-id/main/schemas/lensfollowers.json',
+                schema: 'https://raw.githubusercontent.com/kaistryker/recentifi/main/backend/schema/TierSystem.jsonld',
                 issuer: did,
                 name: 'Tier',
                 type: [ "lensfollowers" ],

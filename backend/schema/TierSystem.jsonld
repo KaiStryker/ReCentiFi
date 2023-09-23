@@ -16,7 +16,7 @@
                         "@type": "xsd:double"
                     }
                 },
-                "@id": "https://raw.githubusercontent.com/kaistryker/recentifi/main/backend/schema/TierSystem.json"
+                "@id": "https://raw.githubusercontent.com/kaistryker/recentifi/main/backend/schema/TierSystem.jsonld"
             }
         }
     ]
