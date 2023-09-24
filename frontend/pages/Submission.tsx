@@ -30,7 +30,9 @@ export default function Submission() {
     <div>
       <FiUpload className={styles.upload_icon}/>
     </div>
-      <form action="/action_page.php" 
+      <form 
+      // action="/action_page.php" 
+         action="/Loading" 
       style={{
         display: "flex",
         flexDirection: "column",

@@ -16,23 +16,30 @@ export default function Loading() {
 
   return (
     <>
-    <div>
+    <div className={styles.loading_main_container}>
       <div className={styles.load} style={{ visibility: isLoading ? 'visible' : 'hidden' }}>
         <div className={styles.content}>
-          <h3>Hang tight while we are verifying your pickup.</h3>
-          <Image src={loaderGif} alt="Loading" width={100} height={100} />
+          <div>
+          <h3>Hang tight while we verify your pickup.</h3>
+          </div>
+          <div>
+          <Image src={loaderGif} alt="Loading" width={150} height={150} />
+          </div>
         </div>
       </div>
       {/* Conditionally render your content based on the isLoading state */}
       {!isLoading && (
-        <div>
-          {/* Your content goes here */}
+        <div className={styles.sucess_content}> 
           <h2>Success!</h2>
           <p>You can now login into your Polygon ID</p>
           <div>
+            {/* TODO: 
+            Add Polygon Id pop to button below */}
             <button>
               Polygon ID login
             </button>
+          {/* TODO: 
+          After Polygon ID verification route to dashboard */}
           </div>
         </div>
       )}
