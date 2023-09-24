@@ -3,6 +3,7 @@ import styles from './Loading.module.css';
 import loaderGif from './../public/loader.gif'
 import Image from 'next/image'; 
 import Link from 'next/link';
+import { useRouter } from 'next/router'; 
 import axios from 'axios'
 
 export default function Loading() {
@@ -10,12 +11,14 @@ export default function Loading() {
   const [qrUrl, setqrUrl] = useState("");
   const [nextStep, setNextStep] = useState(false)
 
+  const router = useRouter(); 
+
   const claimCredential = async () => {
     try {
-      const response = await axios.post('http://localhost:8080/api/claim');
+      const response = await axios.get('http://localhost:8080/api/claim');
   
       // Handle success
-      if (response.data.success) {
+      if (response.data) {
         const qrUrl = response.data.qrUrl
         setqrUrl(qrUrl)
         setNextStep(true)
@@ -38,7 +41,12 @@ export default function Loading() {
 
   useEffect(() => {
     if (qrUrl) {
-        window.location.href = qrUrl;
+        // window.location.href = qrUrl;
+        window.open(qrUrl)
+        // router.push(qrUrl)
+        // setTimeout(() => {
+        //   window.location.href = '/Dashboard';
+        // }, 5000);
     }
   }, [qrUrl]);
 

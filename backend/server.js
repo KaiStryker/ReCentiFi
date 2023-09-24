@@ -5,6 +5,7 @@ const getRawBody = require('raw-body');
 const { exec } = require('child_process');
 const multer = require('multer');
 const cors = require('cors');
+const axios = require('axios')
 
 const app = express();
 const port = 8080;
@@ -70,9 +71,16 @@ const issueClaim = async (req, res) => {
           distribute: true
       }
   };
+  const axiosHeaders = {
+    headers: {
+      'DOCK-API-TOKEN': "eyJzY29wZXMiOlsidGVzdCIsImFsbCJdLCJzdWIiOiIxMDIxMyIsInNlbGVjdGVkVGVhbUlkIjoiMTQyOTQiLCJjcmVhdG9ySWQiOiIxMDIxMyIsImlhdCI6MTY5NTUwMDQ3NywiZXhwIjo0Nzc0Nzk2NDc3fQ.3ILrmcQEfrHGnC96bKkd571Xu7M9j_lqEF6CAGKEheS7xfRR7PIj6GXsvlF6zlmnEVTcEVW5PUw3RLejFxH4Dw"
+    },
+  };
 
-  const claim = await axios.post(`${baseUrl}/credentials/request-claims`, requestBody, axiosHeaders);
-  return res.status(200).set('Content-Type', 'application/json').send(claim.data);
+  const claim = await axios.post(`https://api-testnet.dock.io/credentials/request-claims`, requestBody, axiosHeaders);
+  console.log(claim.data)
+  res.setHeader('Content-Type', 'application/json');
+  return res.status(200).json(claim.data);
 };
 
 const uploadtoFileCoin = async (req, res) => {
