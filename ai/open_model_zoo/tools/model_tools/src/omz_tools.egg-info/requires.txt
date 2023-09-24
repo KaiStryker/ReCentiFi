@@ -1,0 +1,16 @@
+openvino-telemetry>=2023.1.0
+pyyaml>=5.4.1
+requests>=2.25.1
+
+[paddle]
+paddlepaddle>=2.2.0
+
+[pytorch]
+onnx>=1.13
+scipy>=1.5.4
+torch>=1.8.1
+torchvision>=0.9.1
+yacs>=0.1.8
+
+[tensorflow2]
+tensorflow<2.13.0,>=2.5
