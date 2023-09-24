@@ -85,11 +85,11 @@ const issueClaim = async (req, res) => {
 
 const uploadtoFileCoin = async (req, res) => {
   console.log(req)
-  const videoBuffer = req.file.buffer;
+  // const videoBuffer = req.file.buffer;
 
-  // For simplicity, saving the file locally
-  require('fs').writeFileSync('video.mp4', videoBuffer);
-  await scanVideo()
+  // // For simplicity, saving the file locally
+  // require('fs').writeFileSync('video.mp4', videoBuffer);
+  // await scanVideo()
 
   // // Mocking the Filecoin upload with local save
   // exec('lotus client import video.mp4', (error, stdout, stderr) => {

@@ -19,7 +19,8 @@ export default function Dashboard() {
     <>
       <div id='hidden_dashboard' className={styles.dashboard_main_container}>
         <div>
-          <h1>ReCentiFi Dashboard</h1>
+        <h1 className={styles.h1}>
+            <span  className={styles.span}>Re</span>Centi<span className={styles.span}>Fi</span> Dashboard</h1>
         </div>
         <div className={styles.dashboard_sub_container}>
         
@@ -42,14 +43,14 @@ export default function Dashboard() {
           </div>
           <div className="container">
             {showDiv1 && (
-              <div>
-                <h3>Unisawp V4 Hook</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                <h3>AI Chatbot</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                <h3>Private Events</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-              </div>
+             <div>
+             <h3>Unisawp V4 Hook</h3>
+             <p>Gain access to our exclusive liquidity pool where you can become an LP. Must be a tier 1 member.</p>
+             <h3>AI Chatbot</h3>
+             <p>Specailized AI bot services, that is not yet realized to the general public!</p>
+             <h3>Private Events</h3>
+             <p>At this Tier you have access to local community meetups that are not open to the public, traveling stipends for out of state and counrty events and more.</p>
+           </div>
             )}
             {showDiv2 && (
               <div>

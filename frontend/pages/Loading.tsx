@@ -57,7 +57,7 @@ export default function Loading() {
       <div className={styles.load} style={{ visibility: isLoading ? 'visible' : 'hidden' }}>
         <div className={styles.content}>
           <div>
-          <h3>Hang tight while we verify your pickup.</h3>
+          <h3 className={styles.h1}>Hang tight while we verify your pickup.</h3>
           </div>
           <div>
           <Image src={loaderGif} alt="Loading" width={150} height={150} />
@@ -67,12 +67,12 @@ export default function Loading() {
       {/* Conditionally render your content based on the isLoading state */}
       {!isLoading && (
         <div className={styles.sucess_content}> 
-          <h2>Success!</h2>
-          <p>You can now claim your Credential</p>
+          <h2 className={styles.h1}>Success!</h2>
+          <p className={styles.p}>You can now claim your Credential</p>
           <div>
             {/* TODO: 
             Add Polygon Id pop to button below */}
-            <button onClick={claimCredential}>
+            <button className={styles.button} onClick={claimCredential}>
               Claim Credential
             </button>
             { nextStep && (

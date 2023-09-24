@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300;0,500;1,400&display=swap');
 .dashboard_main_container{
     display: flex;
     flex-direction: column;
@@ -5,6 +6,20 @@
     justify-content: center;
     width: 100vw;
     height: 100vh;
+    background-image: url(./../public/bg3.png);
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-position: right;
+	background-size: cover;
+}
+
+.span{
+    color:rgb(97, 160, 94)
+}
+
+.h1{
+    font-size: xx-large;
+    font-family: 'Rubik';
 }
 
 .dashboard_sub_container{
@@ -27,7 +42,7 @@
         display: flex;
         justify-content: center;
         flex-direction: column;
-        padding-top: 18px;
+        padding-top: 12px;
 }
 .li{
     list-style: none;
@@ -35,4 +50,5 @@
 .test{
     display: flex;
     justify-content: space-between;
+    border-bottom: solid;
 }
