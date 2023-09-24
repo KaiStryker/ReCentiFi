@@ -25,6 +25,7 @@
 .link_text{
     color: white;
     font-size: large;
+    text-decoration: none;
 }
 
 .h1{
