@@ -17,7 +17,7 @@ export default function Dashboard() {
 
   return (
     <>
-      <div className={styles.dashboard_main_container}>
+      <div id='hidden_dashboard' className={styles.dashboard_main_container}>
         <div>
           <h1>ReCentiFi Dashboard</h1>
         </div>
@@ -31,11 +31,11 @@ export default function Dashboard() {
             onClick={showTierDiv}>Tier</h4>
             <h4 className={styles.dashboard_li}
              onClick={showPickupsDiv}>Pickups</h4>
-          <div className={styles.dashboard_score}>
+             </div>
+             <div className={styles.dashboard_score}>
                 <li className={styles.li}>Socre: 8.5</li>
                 <li className={styles.li}>Next Tier @ 10</li>
              
-             </div>
             </div>
          
 
@@ -44,8 +44,11 @@ export default function Dashboard() {
             {showDiv1 && (
               <div>
                 <h3>Unisawp V4 Hook</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
                 <h3>AI Chatbot</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
                 <h3>Private Events</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
               </div>
             )}
             {showDiv2 && (

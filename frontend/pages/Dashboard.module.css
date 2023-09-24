@@ -33,6 +33,6 @@
     list-style: none;
 }
 .test{
-    border: solid;
-    border-color: black;
+    display: flex;
+    justify-content: space-between;
 }
