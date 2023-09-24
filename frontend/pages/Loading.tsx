@@ -1,53 +1,5 @@
-// export default function Loading() {
-//   document.onreadystatechange = function () {
-//     var state = document.readyState
-//     if (state == 'complete') {
-//         setTimeout(function(){
-//             document.getElementById('interactive');
-//            document.getElementById('load').style.visibility="hidden";
-//         },1000);
-//     }
-//   }
-//     return (
-//     <>
-//     <div id="load">
-//       <div id="content">
-//       <h1>
-//           Loading page
-//       </h1>
-//       </div>
-     
-//     </div>
-//     </>
-//     );
-//   }
-  
-// import { useEffect, useState } from 'react';
-// import styles from './Loading.module.css';
-
-// export default function Loading() {
-//   const [isLoading, setIsLoading] = useState(true);
-
-//   useEffect(() => {
-//     const timer = setTimeout(() => {
-//       setIsLoading(false);
-//     }, 4000);
-
-//     return () => clearTimeout(timer);
-//   }, []);
-
-//   return (
-//     <div  className={styles.content} style={{ visibility: isLoading ? 'visible' : 'hidden' }}>
-//       <div className={styles.load}>
-//         <h1>Loading page</h1>
-//       </div>
-//       {/* Add your loader image here */}
-//     </div>
-//   );
-// }
-
 import { useEffect, useState } from 'react';
-import styles from './Loading.module.css'; // Update with your CSS import
+import styles from './Loading.module.css';
 import loaderGif from './../public/loader.gif'
 import Image from 'next/image'; 
 
@@ -57,7 +9,7 @@ export default function Loading() {
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false);
-    }, 4000);
+    }, 5000);
 
     return () => clearTimeout(timer);
   }, []);
