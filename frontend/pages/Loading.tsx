@@ -58,10 +58,33 @@ import styles from './Loading.module.css';
 import loaderGif from './../public/loader.gif';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/router'; 
+import axios from 'axios'
 
 export default function Loading() {
   const [isLoading, setIsLoading] = useState(true);
-  const [showDashboardButton, setShowDashboardButton] = useState(false);
+  const [qrUrl, setqrUrl] = useState("");
+  const [nextStep, setNextStep] = useState(false)
+
+  const router = useRouter(); 
+
+  const claimCredential = async () => {
+    try {
+      const response = await axios.get('http://localhost:8080/api/claim');
+  
+      // Handle success
+      if (response.data) {
+        const qrUrl = response.data.qrUrl
+        setqrUrl(qrUrl)
+        setNextStep(true)
+        console.log("qrUrl stored");
+      } else {
+        console.log("Failed to retrieve Url");
+      }
+    } catch (error) {
+      console.error("There was an error claiming the credential:", error);
+    }
+  };
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -70,45 +93,53 @@ export default function Loading() {
 
     return () => clearTimeout(timer);
   }, []);
-
-  const handleCleanCredentialClick = () => {
-    // Add your clean credential logic here
-
-    // After credential is cleaned, show the "Go to Dashboard" button
-    setShowDashboardButton(true);
-  };
+  
+  useEffect(() => {
+    if (qrUrl) {
+        // window.location.href = qrUrl;
+        window.open(qrUrl)
+        // router.push(qrUrl)
+        // setTimeout(() => {
+        //   window.location.href = '/Dashboard';
+        // }, 5000);
+    }
+  }, [qrUrl]);
 
   return (
     <>
-      <div className={styles.loading_main_container}>
-        <div className={styles.load} style={{ visibility: isLoading ? 'visible' : 'hidden' }}>
-          <div className={styles.content}>
-            <div>
-              <h3 className={styles.h1}>Hang tight while we verify your pickup.</h3>
-            </div>
-            <div>
-              <Image src={loaderGif} alt="Loading" width={150} height={150} />
-            </div>
+    <div className={styles.loading_main_container}>
+      <div className={styles.load} style={{ visibility: isLoading ? 'visible' : 'hidden' }}>
+        <div className={styles.content}>
+          <div>
+          <h3 className={styles.h1}>Hang tight while we verify your pickup.</h3>
+          </div>
+          <div>
+          <Image src={loaderGif} alt="Loading" width={150} height={150} />
           </div>
         </div>
-        {/* Conditionally render your content based on the isLoading state */}
-        {!isLoading && (
-          <div className={styles.success_content}>
-            <h2 className={styles.h1}>Success!</h2>
-            <p className={styles.p}>You can now log in to your Polygon ID</p>
-            <div>
-              <button className={styles.button} onClick={handleCleanCredentialClick}>
-                Clean Credential
-              </button>
-              {showDashboardButton && (
-                <button className={styles.button}>
-                  <Link  className={styles.link_text} href="/Dashboard">Go to Dashboard</Link>
-                </button>
-              )}
-            </div>
-          </div>
-        )}
       </div>
+      {/* Conditionally render your content based on the isLoading state */}
+      {!isLoading && (
+        <div className={styles.sucess_content}> 
+          <h2 className={styles.h1}>Success!</h2>
+          <p className={styles.p}>You can now claim your Credential</p>
+          <div>
+            {/* TODO: 
+            Add Polygon Id pop to button below */}
+            <button className={styles.button} onClick={claimCredential}>
+              Claim Credential
+            </button>
+            { nextStep && (
+                <button>
+                <Link href="/Dashboard">Go to Dashboard</Link>
+                </button> 
+            )}
+          {/* TODO: 
+          After Clean Credential verification route to dashboard */}
+          </div>
+        </div>
+      )}
+    </div>
     </>
   );
 }
