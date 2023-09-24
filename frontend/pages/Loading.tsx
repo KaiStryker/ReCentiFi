@@ -3,9 +3,30 @@ import styles from './Loading.module.css';
 import loaderGif from './../public/loader.gif'
 import Image from 'next/image'; 
 import Link from 'next/link';
+import axios from 'axios'
 
 export default function Loading() {
   const [isLoading, setIsLoading] = useState(true);
+  const [qrUrl, setqrUrl] = useState("");
+  const [nextStep, setNextStep] = useState(false)
+
+  const claimCredential = async () => {
+    try {
+      const response = await axios.post('http://localhost:8080/api/claim');
+  
+      // Handle success
+      if (response.data.success) {
+        const qrUrl = response.data.qrUrl
+        setqrUrl(qrUrl)
+        setNextStep(true)
+        console.log("qrUrl stored");
+      } else {
+        console.log("Failed to retrieve Url");
+      }
+    } catch (error) {
+      console.error("There was an error claiming the credential:", error);
+    }
+  };
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -14,6 +35,13 @@ export default function Loading() {
 
     return () => clearTimeout(timer);
   }, []);
+
+  useEffect(() => {
+    if (qrUrl) {
+        window.location.href = qrUrl;
+    }
+  }, [qrUrl]);
+
 
   return (
     <>
@@ -36,12 +64,14 @@ export default function Loading() {
           <div>
             {/* TODO: 
             Add Polygon Id pop to button below */}
-            <button>
-              Clean Credential
+            <button onClick={claimCredential}>
+              Claim Credential
             </button>
-            <button>
-            <Link href="/Dashboard">Go to Dashboard</Link>
-            </button>
+            { nextStep && (
+                <button>
+                <Link href="/Dashboard">Go to Dashboard</Link>
+                </button> 
+            )}
           {/* TODO: 
           After Clean Credential verification route to dashboard */}
           </div>
