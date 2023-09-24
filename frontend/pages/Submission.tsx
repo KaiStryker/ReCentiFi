@@ -16,7 +16,7 @@ export default function Submission() {
   <>
   <div className={styles.subumission_main_container}>
     <div>
-    <h1>
+    <h1 className={styles.h1}>
        Upload your Submission to Filecoin
     </h1>
     </div>
@@ -37,12 +37,13 @@ export default function Submission() {
         display: "flex",
         flexDirection: "column",
       }}>
-          <input
+          <input className={styles.button1}
            style={{
-            margin: "15px"
+            marginTop: "15px",
+            marginBottom: "15px"
           }}
            type="file" id="myFile" name="filename"/>
-          <input type="submit" onClick={handleSubmitClick}  />
+          <input className={styles.button} type="submit" onClick={handleSubmitClick}  />
       </form>
     </div>
     </div>

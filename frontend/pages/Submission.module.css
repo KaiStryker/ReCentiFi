@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300;0,500;1,400&display=swap');
 .subumission_main_container{
     display: flex;
     flex-direction: column;
@@ -5,8 +6,15 @@
     justify-content: center;
     width: 100vw;
     height: 100vh;
+    background-image: url(./../public/bg3.png);
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-position: right;
+	background-size: cover;
 }
-
+.h1{
+    font-family: 'Rubik';
+}
 .submission_sub_container{
     display: flex;
     align-items: center;
@@ -14,11 +22,8 @@
     justify-content: center;
     width: 100vw;
     height: 80%;
-    border-width: thin;
-    border-color: black;
-    border-style: solid;
 }
-
+/* 
 .form{
     width: 40%;
     height: 80%;
@@ -28,22 +33,39 @@
     border-color: black;
     border-style: solid;
     padding: 10px;
-}
+} */
 
 .upload_box{
     display: flex;
     flex-direction: column;
-    width: 40%;
+    width: 60%;
     height: 80%;
     align-items: center;
     justify-content: center;
-    border-width: thin;
+    border-width: thick;
     border-color: black;
     border-style: solid;
     padding: 10px;
+    background-color: rgb(123, 129, 135);
 }
 
 .upload_icon{
     height: 40px;
     width: 40px;
+    color: white;
+}
+
+.button{
+    padding: 10px;
+    background-color: black;
+    color: white;
+    font-size: large;
+    font-family: 'Rubik';
+}
+
+.button1{
+    padding: 10px;
+    background-color: white;
+    font-size: large;
+    font-family: 'Rubik';
 }
