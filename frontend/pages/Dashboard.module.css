@@ -27,7 +27,7 @@
         display: flex;
         justify-content: center;
         flex-direction: column;
-        padding-top: 18px;
+        padding-top: 12px;
 }
 .li{
     list-style: none;
@@ -35,4 +35,5 @@
 .test{
     display: flex;
     justify-content: space-between;
+    border-bottom: solid;
 }
