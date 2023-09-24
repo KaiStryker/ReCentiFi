@@ -32,17 +32,17 @@ const createProfile = async (did) => {
 
 const issueClaim = async (did, tier) => {
     const requestBody = {
-        schema: 'https://raw.githubusercontent.com/kaistryker/recentifi/main/backend/schema/TierSystem.json',
+        schema: 'https://raw.githubusercontent.com/KaiStryker/ReCentiFi/main/backend/schema/TierSystem.json',
         claims: [ 'id' ],
         credentialOptions: {
             anchor: false,
             persist: false,
             emailMessage: '',
             credential: {
-                schema: 'https://raw.githubusercontent.com/kaistryker/recentifi/main/backend/schema/TierSystem.jsonld',
+                schema: 'https://raw.githubusercontent.com/KaiStryker/ReCentiFi/main/backend/schema/TierSystem.json',
                 issuer: did,
                 name: 'Tier',
-                type: [ "lensfollowers" ],
+                type: [ "membership" ],
                 subject: {
                     Tier: tier
                 }

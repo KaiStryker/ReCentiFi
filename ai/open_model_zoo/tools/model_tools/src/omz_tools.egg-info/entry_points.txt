@@ -1,0 +1,6 @@
+[console_scripts]
+omz_converter = openvino.model_zoo.omz_converter:main
+omz_data_downloader = openvino.model_zoo.omz_data_downloader:main
+omz_downloader = openvino.model_zoo.omz_downloader:main
+omz_info_dumper = openvino.model_zoo.omz_info_dumper:main
+omz_quantizer = openvino.model_zoo.omz_quantizer:main

@@ -1,0 +1,19 @@
+Metadata-Version: 2.1
+Name: omz-tools
+Version: 1.0.4
+Summary: Model Downloader and other automation tools from Open Model Zoo
+Classifier: License :: OSI Approved :: Apache Software License
+Classifier: Programming Language :: Python :: 3
+Requires-Dist: openvino-telemetry>=2023.1.0
+Requires-Dist: pyyaml>=5.4.1
+Requires-Dist: requests>=2.25.1
+Provides-Extra: pytorch
+Requires-Dist: onnx>=1.13; extra == "pytorch"
+Requires-Dist: scipy>=1.5.4; extra == "pytorch"
+Requires-Dist: torch>=1.8.1; extra == "pytorch"
+Requires-Dist: torchvision>=0.9.1; extra == "pytorch"
+Requires-Dist: yacs>=0.1.8; extra == "pytorch"
+Provides-Extra: tensorflow2
+Requires-Dist: tensorflow<2.13.0,>=2.5; extra == "tensorflow2"
+Provides-Extra: paddle
+Requires-Dist: paddlepaddle>=2.2.0; extra == "paddle"
