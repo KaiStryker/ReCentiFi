@@ -2,29 +2,29 @@ const axios = require('axios');
 const baseUrl = process.env.BASE_URL;
 const axiosHeaders = {
     headers: {
-        'DOCK-API-TOKEN': process.env.DOCK_API_TOKEN,
+        'DOCK-API-TOKEN': "eyJzY29wZXMiOlsidGVzdCIsImFsbCJdLCJzdWIiOiIxMDIxMyIsInNlbGVjdGVkVGVhbUlkIjoiMTQyOTQiLCJjcmVhdG9ySWQiOiIxMDIxMyIsImlhdCI6MTY5NTUwMDQ3NywiZXhwIjo0Nzc0Nzk2NDc3fQ",
     },
 };
 
 // issueClaim.js
 module.exports = async (req, res) => {
     const did = req.query.did;
-    const UserID = req.query.UserID;
+    const tier = req.query.tier;
 
     const requestBody = {
-        schema: 'https://api.jsonbin.io/v3/qs/64bc55f98e4aa6225ec1fb4d',
-        claims: ['id'],
+        schema: 'https://raw.githubusercontent.com/KaiStryker/ReCentiFi/main/backend/schema/TierSystem.json',
+        claims: [ 'id' ],
         credentialOptions: {
             anchor: false,
             persist: false,
             emailMessage: '',
             credential: {
-                schema: 'https://api.jsonbin.io/v3/qs/64bc55f98e4aa6225ec1fb4d',
+                schema: 'https://raw.githubusercontent.com/KaiStryker/ReCentiFi/main/backend/schema/TierSystem.json',
                 issuer: did,
-                name: 'UID',
-                type: ["VerifiableCredential"],
+                name: 'Tier',
+                type: [ "membership" ],
                 subject: {
-                    UID: UserID,
+                    Tier: tier
                 }
             },
             distribute: true
