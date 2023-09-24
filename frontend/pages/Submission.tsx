@@ -69,7 +69,6 @@ export default function Submission() {
       </form>
     </div>
     </div>
-
   </div>
   </>
   );

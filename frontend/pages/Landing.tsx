@@ -48,9 +48,11 @@ export default function Landing() {
             </IDKitWidget>
           </div>
         </div>
+        <div className={styles.landing_sub_container2}>
+        </div>
       </div>
       <div>
-        
+     
       </div>
     </>
   );

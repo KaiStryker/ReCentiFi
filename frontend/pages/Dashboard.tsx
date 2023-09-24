@@ -18,6 +18,8 @@ export default function Dashboard() {
   return (
     <>
       <div id='hidden_dashboard' className={styles.dashboard_main_container}>
+      
+       
         <div>
         <h1 className={styles.h1}>
             <span  className={styles.span}>Re</span>Centi<span className={styles.span}>Fi</span> Dashboard</h1>
