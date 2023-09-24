@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import styles from './Loading.module.css';
 import loaderGif from './../public/loader.gif'
 import Image from 'next/image'; 
+import Link from 'next/link';
 
 export default function Loading() {
   const [isLoading, setIsLoading] = useState(true);
@@ -36,11 +37,15 @@ export default function Loading() {
             {/* TODO: 
             Add Polygon Id pop to button below */}
             <button>
-              Polygon ID login
+              Clean Credential
+            </button>
+            <button>
+            <Link href="/Dashboard">Go to Dashboard</Link>
             </button>
           {/* TODO: 
-          After Polygon ID verification route to dashboard */}
+          After Clean Credential verification route to dashboard */}
           </div>
+
         </div>
       )}
     </div>
