@@ -60,7 +60,7 @@ export default function Loading() {
       {!isLoading && (
         <div className={styles.sucess_content}> 
           <h2>Success!</h2>
-          <p>You can now login into your Polygon ID</p>
+          <p>You can now claim your Credential</p>
           <div>
             {/* TODO: 
             Add Polygon Id pop to button below */}
@@ -75,7 +75,6 @@ export default function Loading() {
           {/* TODO: 
           After Clean Credential verification route to dashboard */}
           </div>
-
         </div>
       )}
     </div>
