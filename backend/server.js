@@ -84,30 +84,28 @@ const issueClaim = async (req, res) => {
 };
 
 const uploadtoFileCoin = async (req, res) => {
+  console.log(req)
   const videoBuffer = req.file.buffer;
 
   // For simplicity, saving the file locally
   require('fs').writeFileSync('video.mp4', videoBuffer);
   await scanVideo()
 
-  // Mocking the Filecoin upload with local save
-  exec('lotus client import video.mp4', (error, stdout, stderr) => {
-      if (error) {
-          res.status(500).json({ error: 'Failed to upload to Filecoin.' });
-          return;
-      }
+  // // Mocking the Filecoin upload with local save
+  // exec('lotus client import video.mp4', (error, stdout, stderr) => {
+  //     if (error) {
+  //         res.status(500).json({ error: 'Failed to upload to Filecoin.' });
+  //         return;
+  //     }
 
-      // This will be the CID from Filecoin in a real scenario
-      const mockCID = 'QmYourFilecoinCID12345';
-      res.json({ success: true, cid: mockCID });
+  //     // This will be the CID from Filecoin in a real scenario
+  //     const mockCID = 'QmYourFilecoinCID12345';
+  //     res.json({ success: true, cid: mockCID });
 
-  });
+  // });
 }
 
 const scanVideo = async () => {
-
-  // For simplicity, saving the file locally
-  require('fs').writeFileSync(`${__dirname}/video.mp4`, videoBuffer);
 
   // Mocking the Filecoin upload with local save
   exec(`python3 action_recognition_demo.py \

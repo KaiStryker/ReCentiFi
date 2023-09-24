@@ -1,10 +1,22 @@
 import styles from "./Landing.module.css"
 // import styles from "./footer.module.css";
-import Link from "next/link";
-
-
+import { IDKitWidget, ISuccessResult } from '@worldcoin/idkit'
+import { useRouter } from 'next/router'; 
 
 export default function Landing() {
+
+  const onSuccess = (response: ISuccessResult) => {
+    console.log(response)
+    window.location.href = '/Submission';
+  }
+  
+  const handleVerify = (response: ISuccessResult) => {
+    console.log(response)
+    window.location.href = '/Submission';
+    
+  }
+
+
   return (
     <>
       <div className={styles.landing}>
@@ -22,9 +34,15 @@ export default function Landing() {
             2. Click on "Submit a new pickup here" below
             </p>
             <h4> Worldcoin Verifcation</h4>
-            <button>
-            <Link href="/Submission">Submit a new pickup here.</Link>
-            </button>
+            <IDKitWidget
+              app_id="app_staging_9a3ad7be55658bd96c54f193ad85bd1c" // obtained from the Developer Portal
+              action="test1" // this is your action name from the Developer Portal
+              onSuccess={onSuccess} // callback when the modal is closed
+              handleVerify={handleVerify} // optional callback when the proof is received
+              credential_types={['orb', 'phone']} // optional, defaults to ['orb']
+            >
+              {({ open }) => <button onClick={open}>Verify with World ID</button>}
+            </IDKitWidget>
           </div>
         </div>
       </div>
