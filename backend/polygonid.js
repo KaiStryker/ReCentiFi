@@ -59,5 +59,5 @@ const issueClaim = async (did, tier) => {
 
 // export { issueClaim, issueDid, createProfile, DiD }
 
-console.log(issueClaim("did:polygonid:polygon:mumbai:2qE7vMuYG1Jj4TjwTTBeCfETS5yz2SdnY5hkvTQjgw", 0))
-// console.log(issueDid())
+// console.log(issueClaim("did:polygonid:polygon:mumbai:2qE7vMuYG1Jj4TjwTTBeCfETS5yz2SdnY5hkvTQjgw", 0))
+console.log(issueDid())

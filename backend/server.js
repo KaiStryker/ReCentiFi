@@ -1,5 +1,6 @@
 const express = require('express');
 const {auth, resolver, loaders } = require('@iden3/js-iden3-auth')
+const session = require('express-session');
 const { Server } = require("socket.io");
 const getRawBody = require('raw-body');
 const { exec } = require('child_process');
@@ -42,7 +43,7 @@ app.get("/api/sign-in", (req, res) => {
 });
 
 app.get("/api/claim", (req, res) => {
-  console.log('get Auth Request');
+  console.log('get Claim');
   issueClaim(req,res);
 });
 
@@ -99,7 +100,7 @@ const issueClaim = async (req, res) => {
 
   const claim = await axios.post(`https://api-testnet.dock.io/credentials/request-claims`, requestBody, axiosHeaders);
   console.log(claim.data)
-  requestIds.set(`${sessionId}`, claim.data.id)
+  requestIds.set(`${req.sessionID}`, claim.data.id)
   res.setHeader('Content-Type', 'application/json');
   return res.status(200).json(claim.data);
 };
@@ -170,27 +171,25 @@ const scanVideo = async (req, res) => {
  
 async function GetAuthRequest(req,res) {
   // Audience is verifier id
-  const hostUrl = "https://4b04-208-123-173-93.ngrok-free.app"; // need to change everytime you stand up a ngrok tunnel
+  const hostUrl = "https://c314-2600-4041-5420-e900-1100-b497-a3b3-280d.ngrok-free.app"; // need to change everytime you stand up a ngrok tunnel
   const sessionId = req.sessionID;
   const callbackURL = "/api/callback";
-  const audience = "did:polygonid:polygon:mumbai:2qE7vMuYG1Jj4TjwTTBeCfETS5yz2SdnY5hkvTQjgw";
+  const audience = "did:polygonid:polygon:mumbai:2qLgibtXAUny9coom31rxwqyH9PwRkWRc4qqqiBEvQ";
 
-  const uri = `${hostUrl}${callbackURL}?sessionId=${sessionId}`;
+  const url = `${hostUrl}${callbackURL}?sessionId=${sessionId}`;
 
   // Generate request for basic authentication
   const request = auth.createAuthorizationRequest(
     'check ID',
     audience,
-    uri,
+    url,
   );
 
-
   const proofRequest = {
-      id: 1695528474,
       circuitId: 'credentialAtomicQuerySigV2',
+      id: 1695710304,
       query: {
         allowedIssuers: ['did:polygonid:polygon:mumbai:2qE7vMuYG1Jj4TjwTTBeCfETS5yz2SdnY5hkvTQjgw'],
-        type: 'membership',
         context: 'https://raw.githubusercontent.com/KaiStryker/ReCentiFi/main/backend/schema/TierSystem.jsonld',
         credentialSubject: {
           Tier: {
@@ -198,11 +197,12 @@ async function GetAuthRequest(req,res) {
           },
         },
         skipClaimRevocationCheck: true,
+        type: 'membership'
     },
   };
 
-  request.id = '1695528474';
-  request.thid = '1695528474'; // need to change 
+  request.id = sessionId
+  request.thid =sessionId; // need to change 
 
   const scope = request.body.scope ?? [];
   request.body.scope = [...scope, proofRequest];
