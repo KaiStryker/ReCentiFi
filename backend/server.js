@@ -10,9 +10,27 @@ const axios = require('axios')
 const app = express();
 const port = 8080;
 app.use(cors());
+
+app.use(session({
+  secret: 'mySecret',
+  resave: false,
+  saveUninitialized: true,
+  cookie: { secure: false } // set to true if you're using HTTPS
+}));
+
 const io = new Server();
 
-const storage = multer.memoryStorage();
+// const storage = multer.memoryStorage();
+
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+      cb(null, './uploads/'); // set the destination
+  },
+  filename: function (req, file, cb) {
+      cb(null, file.originalname); // set the filename
+  }
+});
+
 const upload = multer({ storage: storage });
 
 
@@ -35,7 +53,7 @@ app.post("/api/callback", (req, res) => {
 
 app.post("/api/upload", upload.single('video'), (req, res) => {
   console.log('upload');
-  uploadtoFileCoin(req,res);
+  uploadVideo(req,res);
 });
 
 app.listen(port, () => {
@@ -50,6 +68,8 @@ const socketMessage = (fn, status, data) => ({
 
 // Create a map to store the auth requests and their session IDs
 const requestMap = new Map();
+// Create a map to store the requestsId
+const requestIds = new Map();
 
 const issueClaim = async (req, res) => {
   const requestBody = {
@@ -79,18 +99,20 @@ const issueClaim = async (req, res) => {
 
   const claim = await axios.post(`https://api-testnet.dock.io/credentials/request-claims`, requestBody, axiosHeaders);
   console.log(claim.data)
+  requestIds.set(`${sessionId}`, claim.data.id)
   res.setHeader('Content-Type', 'application/json');
   return res.status(200).json(claim.data);
 };
 
-const uploadtoFileCoin = async (req, res) => {
-  console.log(req)
-  // const videoBuffer = req.file.buffer;
-
-  // // For simplicity, saving the file locally
-  // require('fs').writeFileSync('video.mp4', videoBuffer);
-  // await scanVideo()
-
+const uploadVideo = async (req, res) => {
+  try {
+    res.send({ success: true, filePath: req.file.path });
+    scanVideo(req, res)
+} catch (error) {
+    console.error("Error sending response:", error);
+    res.status(500).send({ success: false, message: "Internal Server Error" });
+}
+ 
   // // Mocking the Filecoin upload with local save
   // exec('lotus client import video.mp4', (error, stdout, stderr) => {
   //     if (error) {
@@ -105,33 +127,51 @@ const uploadtoFileCoin = async (req, res) => {
   // });
 }
 
-const scanVideo = async () => {
+const scanVideo = async (req, res) => {
 
-  // Mocking the Filecoin upload with local save
-  exec(`python3 action_recognition_demo.py \
-  -i ${__dirname}/video.mp4 \
+  const workDir = `${__dirname}/open_model_zoo/demos/action_recognition_demo/python`;
+  const venvDir = `${workDir}/.venv`;
+  const createVenv = `python3 -m venv ${venvDir}`;
+  const activateVenv = `. ${venvDir}/bin/activate`;
+  const installNumpy = "pip install numpy"
+  const installCv = "pip install opencv-python"
+  const exportPath = "export PYTHONPATH=/opt/homebrew/Cellar/openvino/2023.1.0/lib/python3.11/site-packages:$PYTHONPATH";
+  const exportLib = "export DYLD_LIBRARY_PATH=/opt/homebrew/Cellar/openvino/2023.1.0/lib:$DYLD_LIBRARY_PATH";
+  const runScript = `${venvDir}/bin/python3 action_recognition_demo.py \
+  -i ${__dirname}/uploads/${req.file.originalname} \
   --no_show \
-  -at en-de\
+  -at en-de \
   -m_en ./intel/action-recognition-0001/action-recognition-0001-encoder/FP32/action-recognition-0001-encoder.xml \
   -m_de ./intel/action-recognition-0001/action-recognition-0001-decoder/FP32/action-recognition-0001-decoder.xml \
-  -lb ai/open_model_zoo/demos/action_recognition_demo/python/testGarbage.txt`, 
-  (error, stdout, stderr) => {
-      if (error) {
-          res.status(500).json({ error: 'Failed to scan video.' });
-          return;
-      }
+  -lb ${__dirname}/open_model_zoo/demos/action_recognition_demo/python/testGarbage.txt`;
+  
 
+  exec(`cd ${workDir} && ${createVenv} && ${activateVenv} && ${installNumpy} && ${installCv} && ${exportPath} && ${exportLib} && ${runScript}`, 
+    (error, stdout, stderr) => {
+    
+    if (stdout) {
+        console.log("Output:", stdout);
+    }
+    if (stderr) {
+        console.error("Error Output:", stderr);
+    }
+
+    // if (error) {
+    //     res.status(500).json({ error: 'Failed to scan video.' });
+    //     return;
+    // }
+  
       // This will be the CID from Filecoin in a real scenario
-      const valid = stdout.result; // subject to change
-      res.json({ success: true, result: valid });
+      // const valid = stdout.result; // subject to change
+      // res.json({ success: true, result: valid });
   });
 }
  
  
 async function GetAuthRequest(req,res) {
   // Audience is verifier id
-  const hostUrl = "https://4b04-208-123-173-93.ngrok-free.app";
-  const sessionId = 1;
+  const hostUrl = "https://4b04-208-123-173-93.ngrok-free.app"; // need to change everytime you stand up a ngrok tunnel
+  const sessionId = req.sessionID;
   const callbackURL = "/api/callback";
   const audience = "did:polygonid:polygon:mumbai:2qE7vMuYG1Jj4TjwTTBeCfETS5yz2SdnY5hkvTQjgw";
 
@@ -143,9 +183,7 @@ async function GetAuthRequest(req,res) {
     audience,
     uri,
   );
-  
-  request.id = '1695528474';
-  request.thid = '1695528474'; // need to change 
+
 
   const proofRequest = {
       id: 1695528474,
@@ -162,6 +200,9 @@ async function GetAuthRequest(req,res) {
         skipClaimRevocationCheck: true,
     },
   };
+
+  request.id = '1695528474';
+  request.thid = '1695528474'; // need to change 
 
   const scope = request.body.scope ?? [];
   request.body.scope = [...scope, proofRequest];

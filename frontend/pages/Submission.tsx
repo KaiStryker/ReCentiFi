@@ -13,13 +13,20 @@ export default function Submission() {
     const handleFileChange = (e) => {
       setFileToUpload(e.target.files[0]);
     };
+    
 
     const handleUpload = async () => {
         const formData = new FormData();
         formData.append('video', fileToUpload);
+
+        const config = {
+          headers: {
+              'Content-Type': 'multipart/form-data'
+          }
+      };
         
         try {
-            const response = await axios.post('http://localhost:8080/api/upload', formData);
+            const response = await axios.post('http://localhost:8080/api/upload', formData, config);
             console.log(response.data);
             handleSubmitClick()
         } catch (error) {
@@ -31,7 +38,7 @@ export default function Submission() {
     const handleSubmitClick = () => {
       //TODO:
       // Do we need any logic here?
-      router.push('/Loading');
+       router.push('/Loading');
     };
 
   return (
@@ -54,7 +61,7 @@ export default function Submission() {
     </div>
       <form 
       // action="/action_page.php" 
-         action="/Loading" 
+      action="/Loading" 
       style={{
         display: "flex",
         flexDirection: "column",
