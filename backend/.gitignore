@@ -65,6 +65,8 @@ typings/
 # Next.js build output
 .next
 
+# folders
+uploads/*
 
 # Lock files
 package-lock.json

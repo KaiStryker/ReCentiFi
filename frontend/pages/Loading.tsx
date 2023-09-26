@@ -89,7 +89,7 @@ export default function Loading() {
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false);
-    }, 5000);
+    }, 13000);
 
     return () => clearTimeout(timer);
   }, []);
@@ -130,7 +130,7 @@ export default function Loading() {
               Claim Credential
             </button>
             { nextStep && (
-                <button>
+                <button className={styles.button}>
                 <Link href="/Dashboard">Go to Dashboard</Link>
                 </button> 
             )}
