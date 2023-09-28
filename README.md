@@ -23,3 +23,11 @@
 - **Uniswap v4 hook** to provide access to only people with certain credentials (Polygon ID)
 - AI chatbot
 - Private events, including travel stipends for global events
+
+## Images
+
+<img width="1401" alt="ReCentiFi" src="https://github.com/KaiStryker/ReCentiFi/assets/111013332/e4f06ead-7e25-40cf-b459-917b3015e542">
+
+<img width="1429" alt="Screenshot 2023-09-24 at 8 51 00 AM" src="https://github.com/KaiStryker/ReCentiFi/assets/111013332/f69d46e4-9dbb-4378-a831-91bf73f705f9">
+
+<img width="1429" alt="Screenshot 2023-09-24 at 8 51 23 AM" src="https://github.com/KaiStryker/ReCentiFi/assets/111013332/687673c6-399f-4448-a927-03747a917161">
