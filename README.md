@@ -24,6 +24,69 @@
 - AI chatbot
 - Private events, including travel stipends for global events
 
+## Get Started
+
+```bash
+# Clone the repository
+git clone https://github.com/KaiStryker/ReCentiFi.git
+
+# Navigate to the directory
+cd ReCentiFi
+
+# Install dependencies
+npm install
+```
+
+## Dependencies for AI Model
+
+In order to run the ai model, python needs to be installed.
+
+```bash
+# Make sure python is downloaded
+python3 --version
+```
+
+If not installed, [install](https://www.python.org/downloads/) the latest version from the website. 
+
+Run the Installer:
+Once the .pkg file is downloaded, double-click on it to run the installer and follow the installation steps.
+
+Verify Installation:
+Open a new Terminal and type python3 --version and press Enter. This should display the version of Python you just installed.
+
+Once installed, run the following:
+
+```bash
+pip install openvino
+brew install opencv
+```
+
+## Run Server
+
+```bash
+# Navigate to the directory
+cd backend
+
+# Install dependencies
+npm install
+
+#run script
+node server.js
+```
+
+## Run Frontend
+
+```bash
+# Navigate to the directory
+cd frontend
+
+# Install dependencies
+npm install
+
+#run script
+npm run dev
+```
+
 ## Images
 
 <img width="1401" alt="ReCentiFi" src="https://github.com/KaiStryker/ReCentiFi/assets/111013332/e4f06ead-7e25-40cf-b459-917b3015e542">
